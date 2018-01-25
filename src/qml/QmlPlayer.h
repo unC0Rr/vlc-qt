@@ -180,6 +180,8 @@ class VlcQmlPlayer : public VlcQmlSource
      */
     Q_PROPERTY(int videoTrack READ videoTrack WRITE setVideoTrack NOTIFY videoTrackChanged)
 
+    Q_PROPERTY(QStringList mediaOptions READ mediaOptions WRITE setMediaOptions NOTIFY mediaOptionsChanged)
+
 public:
     /*!
         \brief VlcQmlPlayer constructor
@@ -449,6 +451,23 @@ public:
      */
     void setVideoTrack(int videoTrack);
 
+    /*!
+     * \brief Return media options
+     * \return List of options being set before media playback
+     */
+    QStringList mediaOptions() const;
+
+    /*!
+     * \brief Set media options that will be appleid before playing new media
+     *
+     * Setting new list overwrites previous list, and it will affect only new
+     * media (when setting URL). This is limitation of VLC library that does
+     * not allow to aquire already set options, only adding new ones is possible.
+     *
+     * \param List of media options.
+     */
+    void setMediaOptions(const QStringList &options);
+
 signals:
     /*!
         \brief Autoplay changed signal
@@ -525,6 +544,11 @@ signals:
     */
     void videoTrackChanged();
 
+    /*!
+     * \brief Media options changed signal
+     */
+    void mediaOptionsChanged();
+
 private slots:
     void mediaParsed(bool parsed);
     void mediaPlayerVout(int count);
@@ -547,6 +571,7 @@ private:
 
     QStringList _audioPreferredLanguages;
     QStringList _subtitlePreferredLanguages;
+    QStringList _mediaOptions;
 };
 
 #endif // VLCQT_QMLPLAYER_H_
