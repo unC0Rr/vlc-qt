@@ -71,6 +71,9 @@ void VlcQmlPlayer::pause()
 
 void VlcQmlPlayer::play()
 {
+    if (_media && !_mediaOptions.isEmpty())
+        _media->setOptions(_mediaOptions);
+
     _player->play();
 }
 
