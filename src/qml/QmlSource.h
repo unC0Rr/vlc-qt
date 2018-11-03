@@ -68,6 +68,12 @@ public:
     void removePlayer();
 
     /*!
+        \brief Get the current player
+        \return current player
+    */
+    VlcMediaPlayer *player() const;
+
+    /*!
         \brief Register video output
         \param output QML video output
      */
