@@ -1,3 +1,3 @@
-usr/lib/*/libVLCQtQml.so.*
-usr/lib/*/qt5/qml/VLCQt/libVLCQt.so.*
-usr/lib/*/qt5/qml/VLCQt/qmldir
+usr/lib/x86_64-linux-gnu/libVLCQtQml.so*
+usr/lib/x86_64-linux-gnu/qt5/qml/VLCQt/libVLCQt.so*
+usr/lib/x86_64-linux-gnu/qt5/qml/VLCQt/qmldir
