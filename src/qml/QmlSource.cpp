@@ -38,12 +38,12 @@ void VlcQmlSource::removePlayer()
     _videoStream->deinit();
 }
 
-void VlcQmlSource::registerVideoOutput(VlcQmlVideoOutput *output)
+void VlcQmlSource::registerVideoOutput(VlcAbstractQmlVideoOutput *output)
 {
     _videoStream->registerVideoOutput(output);
 }
 
-void VlcQmlSource::deregisterVideoOutput(VlcQmlVideoOutput *output)
+void VlcQmlSource::deregisterVideoOutput(VlcAbstractQmlVideoOutput *output)
 {
     _videoStream->deregisterVideoOutput(output);
 }

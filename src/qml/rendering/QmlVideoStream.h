@@ -24,6 +24,7 @@
 
 #include "core/VideoStream.h"
 
+class VlcAbstractQmlVideoOutput;
 class VlcQmlVideoOutput;
 
 class VlcQmlVideoStream : public VlcVideoStream
@@ -33,15 +34,15 @@ public:
     explicit VlcQmlVideoStream(QObject *parent = 0);
     ~VlcQmlVideoStream();
 
-    void registerVideoOutput(VlcQmlVideoOutput *output);
-    void deregisterVideoOutput(VlcQmlVideoOutput *output);
+    void registerVideoOutput(VlcAbstractQmlVideoOutput *output);
+    void deregisterVideoOutput(VlcAbstractQmlVideoOutput *output);
 
-    QList<VlcQmlVideoOutput *> attachedOutputs() const { return _attachedOutputs; }
+    QList<VlcAbstractQmlVideoOutput *> attachedOutputs() const { return _attachedOutputs; }
 
 private:
     Q_INVOKABLE virtual void frameUpdated();
 
-    QList<VlcQmlVideoOutput *> _attachedOutputs;
+    QList<VlcAbstractQmlVideoOutput *> _attachedOutputs;
 };
 
 #endif // VLCQT_QMLRENDERING_QMLVIDEOSTREAM_H_

@@ -40,10 +40,10 @@ void VlcQmlVideoStream::frameUpdated()
     }
 
     std::for_each(_attachedOutputs.begin(), _attachedOutputs.end(),
-                  std::bind2nd(std::mem_fun(&VlcQmlVideoOutput::presentFrame), frame));
+                  std::bind2nd(std::mem_fun(&VlcAbstractQmlVideoOutput::presentFrame), frame));
 }
 
-void VlcQmlVideoStream::registerVideoOutput(VlcQmlVideoOutput *output)
+void VlcQmlVideoStream::registerVideoOutput(VlcAbstractQmlVideoOutput *output)
 {
     Q_ASSERT(_attachedOutputs.count(output) <= 1);
 
@@ -53,7 +53,7 @@ void VlcQmlVideoStream::registerVideoOutput(VlcQmlVideoOutput *output)
     _attachedOutputs.append(output);
 }
 
-void VlcQmlVideoStream::deregisterVideoOutput(VlcQmlVideoOutput *output)
+void VlcQmlVideoStream::deregisterVideoOutput(VlcAbstractQmlVideoOutput *output)
 {
     Q_ASSERT(_attachedOutputs.count(output) <= 1);
 

@@ -26,6 +26,7 @@
 
 class VlcMediaPlayer;
 
+class VlcAbstractQmlVideoOutput;
 class VlcQmlVideoOutput;
 class VlcQmlVideoStream;
 
@@ -70,13 +71,13 @@ public:
         \brief Register video output
         \param output QML video output
      */
-    virtual void registerVideoOutput(VlcQmlVideoOutput *output);
+    virtual void registerVideoOutput(VlcAbstractQmlVideoOutput *output);
 
     /*!
         \brief Deregister video output
         \param output QML video output
      */
-    virtual void deregisterVideoOutput(VlcQmlVideoOutput *output);
+    virtual void deregisterVideoOutput(VlcAbstractQmlVideoOutput *output);
 
 private:
     // LCOV_EXCL_START

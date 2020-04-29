@@ -31,6 +31,18 @@
 struct VlcYUVVideoFrame;
 class VlcQmlSource;
 
+class VlcAbstractQmlVideoOutput : public QQuickItem {
+    Q_OBJECT
+
+public:
+    VlcAbstractQmlVideoOutput(QQuickItem * parent = nullptr)
+        : QQuickItem(parent) {
+    }
+
+public slots:
+    virtual void presentFrame(const std::shared_ptr<const VlcYUVVideoFrame> &frame) = 0;
+};
+
 /*!
     \class VlcQmlVideoOutput QmlVideoOutput.h VLCQtQml/QmlVideoOutput.h
     \ingroup VLCQtQml
@@ -40,7 +52,7 @@ class VlcQmlSource;
 
     \since VLC-Qt 1.1
  */
-class VLCQT_QML_EXPORT VlcQmlVideoOutput : public QQuickItem
+class VLCQT_QML_EXPORT VlcQmlVideoOutput : public VlcAbstractQmlVideoOutput
 {
     Q_OBJECT
 
@@ -151,7 +163,7 @@ public slots:
         \brief Set frame which will be rendered in the output.
         \param frame
      */
-    void presentFrame(const std::shared_ptr<const VlcYUVVideoFrame> &frame);
+    void presentFrame(const std::shared_ptr<const VlcYUVVideoFrame> &frame) override;
 
 signals:
     /*!
