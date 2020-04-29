@@ -24,6 +24,7 @@
 
 VlcQmlVideoOutput::VlcQmlVideoOutput()
     : _fillMode(Vlc::PreserveAspectFit),
+      _sourceAspectRatio(1.0),
       _source(0),
       _frameUpdated(false)
 {
@@ -107,6 +108,11 @@ void VlcQmlVideoOutput::setCropRatio(int cropRatio)
     emit cropRatioChanged();
 }
 
+qreal VlcQmlVideoOutput::sourceAspectRatio() const
+{
+    return _sourceAspectRatio;
+}
+
 QSGNode *VlcQmlVideoOutput::updatePaintNode(QSGNode *oldNode,
                                             UpdatePaintNodeData *data)
 {
@@ -126,11 +132,19 @@ QSGNode *VlcQmlVideoOutput::updatePaintNode(QSGNode *oldNode,
 
     if (fillMode() != Vlc::Stretch) {
         float sar = _source->player()->sampleAspectRatio();
-        if (sar <= 0) sar = 1;
+        if (sar <= 0) {
+            sar = 1;
+        }
         const uint16_t fw = _frame->width;
         const uint16_t fh = _frame->height * sar;
 
         qreal frameAspectTmp = qreal(fw) / fh;
+
+        if (!qFuzzyCompare(frameAspectTmp, _sourceAspectRatio)) {
+            _sourceAspectRatio = frameAspectTmp;
+            emit sourceAspectRatioChanged();
+        }
+
         QSizeF aspectRatioSize = Vlc::ratioSize(_aspectRatio);
         if (aspectRatioSize.width() != 0 && aspectRatioSize.height() != 0) {
             frameAspectTmp = aspectRatioSize.width() / aspectRatioSize.height();

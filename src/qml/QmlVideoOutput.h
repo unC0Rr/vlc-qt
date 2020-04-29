@@ -88,7 +88,15 @@ class VLCQT_QML_EXPORT VlcQmlVideoOutput : public VlcAbstractQmlVideoOutput
      */
     Q_PROPERTY(int cropRatio READ cropRatio WRITE setCropRatio NOTIFY cropRatioChanged)
 
-public:
+    /*!
+        \brief Current source aspect ratio
+        \see sourceAspectRatio
+        \see sourceAspectRatioChanged
+     */
+    Q_PROPERTY(qreal sourceAspectRatio READ sourceAspectRatio NOTIFY
+                   sourceAspectRatioChanged)
+
+   public:
     VlcQmlVideoOutput();
     ~VlcQmlVideoOutput();
 
@@ -158,7 +166,15 @@ public:
      */
     void setCropRatio(int cropRatio);
 
-public slots:
+    /*!
+        \brief Current source aspect ratio
+        \return source aspect ratio
+
+        Used as property in QML.
+    */
+    qreal sourceAspectRatio() const;
+
+   public slots:
     /*!
         \brief Set frame which will be rendered in the output.
         \param frame
@@ -177,22 +193,29 @@ signals:
     void fillModeChanged();
 
     /*!
-        \brief Fill mode changed signal
+        \brief Aspect ratio changed signal
      */
     void aspectRatioChanged();
 
     /*!
-        \brief Fill mode changed signal
+        \brief Crop ratio changed signal
      */
     void cropRatioChanged();
 
-private:
+    /*!
+        \brief Source aspect ratio changed signal
+     */
+    void sourceAspectRatioChanged();
+
+   private:
     virtual QSGNode *updatePaintNode(QSGNode *oldNode,
                                      UpdatePaintNodeData *data);
 
     Vlc::FillMode _fillMode;
     Vlc::Ratio _aspectRatio;
     Vlc::Ratio _cropRatio;
+
+    qreal _sourceAspectRatio;
 
     QPointer<VlcQmlSource> _source;
 
