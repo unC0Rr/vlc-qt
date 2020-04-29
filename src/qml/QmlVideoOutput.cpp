@@ -24,6 +24,8 @@
 
 VlcQmlVideoOutput::VlcQmlVideoOutput()
     : _fillMode(Vlc::PreserveAspectFit),
+      _aspectRatio(Vlc::Original),
+      _cropRatio(Vlc::Original),
       _sourceAspectRatio(1.0),
       _source(0),
       _frameUpdated(false)
