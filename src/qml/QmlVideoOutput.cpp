@@ -133,7 +133,10 @@ QSGNode *VlcQmlVideoOutput::updatePaintNode(QSGNode *oldNode,
     QRectF srcRect(0, 0, 1., 1.);
 
     if (fillMode() != Vlc::Stretch) {
-        float sar = _source->player()->sampleAspectRatio();
+        float sar = 1;
+        if (_source) {
+            sar = _source->player()->sampleAspectRatio();
+        }
         if (sar <= 0) {
             sar = 1;
         }
